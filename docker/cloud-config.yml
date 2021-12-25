@@ -1,0 +1,29 @@
+#cloud-config
+
+locale: "en_US.UTF-8"
+
+groups:
+  - docker
+
+system_info:
+  default_user:
+    groups: [docker]
+
+package_update: true
+
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg
+  - lsb-release
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-compose
+
+apt:
+  sources:
+    docker.list:
+      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable
+      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
