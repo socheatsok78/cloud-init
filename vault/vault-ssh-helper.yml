@@ -13,7 +13,7 @@ packages:
 write_files:
   - path: /etc/vault-ssh-helper.d/config.hcl
     content: |
-      vault_addr = "http://vault_addr:8200"
+      vault_addr = "http://<vault_addr>:8200"
       ssh_mount_point = "ssh"
       allowed_roles = "*"
       tls_skip_verify = false
