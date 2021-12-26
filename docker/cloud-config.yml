@@ -16,7 +16,10 @@ packages:
   - ca-certificates
   - curl
   - gnupg
+  - gnupg-agent
+  - software-properties-common
   - lsb-release
+  # Docker
   - docker-ce
   - docker-ce-cli
   - containerd.io
