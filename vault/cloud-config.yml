@@ -1,0 +1,19 @@
+#cloud-config
+
+locale: "en_US.UTF-8"
+
+package_update: true
+
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+  - vault
+
+apt:
+  sources:
+    docker.list:
+      source: deb [arch=amd64] https://apt.releases.hashicorp.com $RELEASE main
+      keyid: E8A032E094D8EB4EA189D270DA418C88A3219F7B
