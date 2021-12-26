@@ -1,2 +1,2 @@
-# cloud-config
-My personal cloud-config templates
+# cloud-init
+My personal cloud-init templates
