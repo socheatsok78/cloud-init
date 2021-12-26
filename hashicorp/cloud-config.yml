@@ -16,6 +16,7 @@ packages:
   - nomad
   - packer
   - terraform
+  - vagrant
   - vault
 
 apt:
