@@ -1,0 +1,7 @@
+#cloud-config
+
+write_files:
+  # Enable ipv4 forwarding
+  - path: /etc/sysctl.d/enabled_ipv4_forwarding.conf
+    content: |
+      net.ipv4.conf.all.forwarding=1
