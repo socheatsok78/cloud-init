@@ -1,0 +1,52 @@
+package_update: true
+package_upgrade: false
+
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+  - ntp
+  - unzip
+
+write_files:
+  - path: /etc/vault-ssh-helper.d/config.hcl
+    content: |
+      vault_addr = "http://vault_addr:8200"
+      ssh_mount_point = "ssh"
+      allowed_roles = "*"
+      tls_skip_verify = false
+      # namespace = "my_namespace" # Vault Enterprise only
+      # ca_cert = "<PEM_ENCODED_CA_CERT>"
+
+  - path: /etc/ssh/sshd_config.d/00-vault-config.conf
+    content: |
+      ChallengeResponseAuthentication yes
+      UsePAM yes
+      PasswordAuthentication no
+
+  - path: /etc/pam.d/vault-auth
+    content: |
+      # Hashicorp Vault SSH Helper
+      auth requisite pam_exec.so quiet expose_authtok log=/var/log/vault-ssh.log /usr/local/bin/vault-ssh-helper -config=/etc/vault-ssh-helper.d/config.hcl
+      auth optional pam_unix.so not_set_pass use_first_pass nodelay
+
+  - path: /etc/pam.d/sshd
+    append: true
+    content: |
+      #
+      # Hashicorp Vault authorization.
+      @include vault-auth
+
+  - path: /tmp/installer/vault-ssh-helper.sh
+    content: |
+      #!/bin/bash
+      wget https://releases.hashicorp.com/vault-ssh-helper/0.2.1/vault-ssh-helper_0.2.1_linux_amd64.zip
+      unzip -q vault-ssh-helper_0.2.1_linux_amd64.zip -d /usr/local/bin
+      chmod 0755 /usr/local/bin/vault-ssh-helper
+      chown root:root /usr/local/bin/vault-ssh-helper
+      sed -i 's/^@include common-auth/# @include common-auth/g' /etc/pam.d/sshd
+
+runcmd:
+  - bash /tmp/installer/vault-ssh-helper.sh
