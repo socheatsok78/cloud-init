@@ -8,8 +8,14 @@ packages:
   - apt-transport-https
   - ca-certificates
   - curl
+  - gnupg
   - gnupg-agent
   - software-properties-common
+  # Hashicorp
+  - consul
+  - nomad
+  - packer
+  - terraform
   - vault
 
 apt:
