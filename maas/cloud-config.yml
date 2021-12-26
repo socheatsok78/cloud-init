@@ -4,6 +4,14 @@ locale: "en_US.UTF-8"
 
 package_update: true
 
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg-agent
+  - software-properties-common
+  - ntp
+
 snap:
   commands:
     00: snap install --channel=3.1/stable maas
