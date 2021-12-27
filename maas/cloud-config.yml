@@ -15,4 +15,4 @@ packages:
 
 snap:
   commands:
-    00: snap install --channel=3.1/stable maas
+    - snap install --channel=3.1/stable maas
