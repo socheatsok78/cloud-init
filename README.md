@@ -24,3 +24,10 @@ To test the config, launch a `multipass` with `--cloud-init` flag.
 ```
 multipass launch --name maas --network en0 --cloud-init maas/cloud-config.yml
 ```
+
+Or pulling config from remote
+
+```sh
+wget -qO- https://raw.githubusercontent.com/socheatsok78/cloud-init/main/maas/cloud-config.yml \
+ | multipass launch --name maas --cloud-init -
+```
