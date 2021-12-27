@@ -30,4 +30,9 @@ Or pulling config from remote
 ```sh
 wget -qO- https://raw.githubusercontent.com/socheatsok78/cloud-init/main/maas/cloud-config.yml \
  | multipass launch --name maas --cloud-init -
+
+# or
+
+curl -fsSL https://raw.githubusercontent.com/socheatsok78/cloud-init/main/maas/cloud-config.yml \
+ | multipass launch --name maas --cloud-init -
 ```
